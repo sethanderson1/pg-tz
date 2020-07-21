@@ -55,6 +55,82 @@ app.get('/', async (req, res) => {
 })
 
 
+app.get('/into-as-local', async (req, res) => {
+
+    const knex = req.app.get('db')
+
+    // const dateNow = dayjs()
+    const dateNow = dayjs().format() 
+    // const dateNow = dayjs().utc().format()
+    // const dateNow = new Date()
+    console.log('dateNow', dateNow)
+
+    const newDate = {
+        timestamp: dateNow,
+        timestamptz: dateNow
+    }
+    // await knex.schema.raw('SET timezone="UTC";')
+    datesReturnedFromInsert = await knex
+        .insert(newDate)
+        .into('dates')
+        .returning('*')
+        .then(rows => {
+            return rows[0]
+        });
+
+    console.log('datesReturnedFromInsert', datesReturnedFromInsert)
+    // const localDate = dayjs(datesReturnedFromInsert.timestamptz).format()
+    const localDate = dayjs(datesReturnedFromInsert.timestamptz).format()
+    datesReturnedFromInsert.localDate = localDate
+    // console.log('localDate', localDate)
+    res.send(datesReturnedFromInsert);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.use(function errorHandler(error, req, res, next) {
     let response

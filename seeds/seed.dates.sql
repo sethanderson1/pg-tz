@@ -1,5 +1,5 @@
 -- SET timezone="UTC";
--- psql -U dunder_mifflin -d knex-pg-timezones -f ./seeds/seed.dates.sql
+-- psql -U dunder_mifflin -d pg-tz -f ./seeds/seed.dates.sql
 BEGIN;
 
 TRUNCATE

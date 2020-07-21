@@ -28,8 +28,8 @@ app.get('/', async (req, res) => {
     const knex = req.app.get('db')
 
     // const dateNow = dayjs()
-    // const dateNow = dayjs().format() 
-    const dateNow = dayjs().utc().format()
+    const dateNow = dayjs().format() 
+    // const dateNow = dayjs().utc().format()
     // const dateNow = new Date()
     console.log('dateNow', dateNow)
 

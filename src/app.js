@@ -22,28 +22,14 @@ app.use(
     })
 );
 
-// figure out how to seed and do other things with knex
-
-// app.get('/', async (req, res) => {
-//     const knex = req.app.get('db')
-//     const datesFromSeeds = await knex
-//     .select('*')
-//     .from('dates')
-
-//     console.log('datesFromSeeds', datesFromSeeds)
-
-//     // res.send(JSON.stringify({ datesFromSeeds }));
-//     res.send(datesFromSeeds);
-// })
-
 
 app.get('/', async (req, res) => {
+
     const knex = req.app.get('db')
 
     // const dateNow = dayjs()
-    const dateNow = dayjs().format() //result: timestamp = 
-
-    // const dateNow = dayjs().utc().format()
+    // const dateNow = dayjs().format() 
+    const dateNow = dayjs().utc().format()
     // const dateNow = new Date()
     console.log('dateNow', dateNow)
 
@@ -60,12 +46,11 @@ app.get('/', async (req, res) => {
             return rows[0]
         });
 
-
     console.log('datesReturnedFromInsert', datesReturnedFromInsert)
-
     // const localDate = dayjs(datesReturnedFromInsert.timestamptz).format()
     const localDate = dayjs(datesReturnedFromInsert.timestamptz).format()
-    console.log('localDate', localDate)
+    datesReturnedFromInsert.localDate = localDate
+    // console.log('localDate', localDate)
     res.send(datesReturnedFromInsert);
 })
 
